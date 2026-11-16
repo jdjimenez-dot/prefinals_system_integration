@@ -177,15 +177,17 @@ onBeforeUnmount(() => {
 .qr-video {
   position: absolute;
   inset: 0;
-  display: none;
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   background: #10251a;
+  opacity: 0;
+  transition: opacity .2s ease;
 }
 
 .is-scanning .qr-video {
-  display: block;
+  opacity: 1;
 }
 
 .camera-placeholder {
