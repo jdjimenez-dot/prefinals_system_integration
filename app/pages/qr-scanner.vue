@@ -8,7 +8,7 @@
 
     <v-card class="scanner-card soft-card">
       <div class="camera-frame" :class="{ 'is-scanning': isScanning }">
-        <video ref="videoRef" class="qr-video" playsinline muted></video>
+        <video ref="videoRef" class="qr-video" autoplay playsinline muted></video>
         <div v-if="!isScanning" class="camera-placeholder">
           <div class="camera-icon"><v-icon icon="mdi-qrcode-scan" /></div>
           <strong>Camera preview</strong>
@@ -163,7 +163,8 @@ onBeforeUnmount(() => {
 .camera-frame {
   position: relative;
   display: grid;
-  min-height: 330px;
+  height: clamp(280px, 45vh, 420px);
+  min-height: 280px;
   overflow: hidden;
   place-items: center;
   border: 1px solid #d8e8d4;
@@ -174,11 +175,13 @@ onBeforeUnmount(() => {
 }
 
 .qr-video {
+  position: absolute;
+  inset: 0;
   display: none;
   width: 100%;
   height: 100%;
-  max-height: 460px;
   object-fit: cover;
+  background: #10251a;
 }
 
 .is-scanning .qr-video {
@@ -213,6 +216,7 @@ onBeforeUnmount(() => {
 
 .scan-frame {
   position: absolute;
+  z-index: 1;
   width: min(58vw, 220px);
   height: min(58vw, 220px);
   pointer-events: none;
@@ -360,6 +364,7 @@ onBeforeUnmount(() => {
 
 @media (max-width: 560px) {
   .camera-frame {
+    height: 260px;
     min-height: 260px;
   }
 
